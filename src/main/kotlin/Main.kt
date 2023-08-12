@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
     directory.listFiles()?.forEach {
 
         val promptFile = it.canonicalPath
-        val outputName = "HarryPotter1_chapter_" + it.name.split(".")[0]
+        val outputName = "${ConfigLoader.novelName}_chapter_" + it.name.split(".")[0]
         println(promptFile)
         val promptRequest = BarkAI.Prompt(
             callCommand = ConfigLoader.callCommand,

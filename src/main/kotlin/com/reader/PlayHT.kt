@@ -17,7 +17,9 @@ class PlayHT(
     val title: String,
     val voice: String = "Matthew"
 ) {
-    val calendar = Calendar.getInstance()
+    val calendar: Calendar = Calendar.getInstance()
+    private val user = "nJ5LTCKNKLggxcEhGtPL08IbyMX2"
+    private val secret = "eaf4305d962d405abaf15c51640924ed"
 
     fun promptTTS(): String? {
         val client = OkHttpClient()
@@ -30,15 +32,15 @@ class PlayHT(
             .post(body)
             .addHeader("accept", "application/json")
             .addHeader("content-type", "application/json")
-            .addHeader("AUTHORIZATION", "407377c522dc4b37890b56f04a33c742")
-            .addHeader("X-USER-ID", "Yt5unHL11iSJCHHk8pRnZPU1fX42")
+            .addHeader("X-USER-ID", user)
+            .addHeader("AUTHORIZATION", secret)
             .build()
 
         val response: Response = client.newCall(request).execute()
         val responseStatus = response.code()
 
         if (responseStatus != HttpURLConnection.HTTP_CREATED)
-            return null
+            throw Exception("Request status: $responseStatus - Message: ${response.message()}")
 
         val gson = Gson()
         val ttsResponse = gson.fromJson(response.body().string(), TTSResponse::class.java)
@@ -48,10 +50,7 @@ class PlayHT(
         return transcriptionId
     }
 
-    fun jobStatus(transcriptionId: String?): String {
-        if (transcriptionId == null) {
-            return ""
-        }
+    fun jobStatus(transcriptionId: String): String {
 
         val client = OkHttpClient()
 
@@ -59,8 +58,8 @@ class PlayHT(
             .url("https://play.ht/api/v1/articleStatus?transcriptionId=$transcriptionId")
             .get()
             .addHeader("accept", "application/json")
-            .addHeader("AUTHORIZATION", "407377c522dc4b37890b56f04a33c742")
-            .addHeader("X-USER-ID", "Yt5unHL11iSJCHHk8pRnZPU1fX42")
+            .addHeader("X-USER-ID", user)
+            .addHeader("AUTHORIZATION", secret)
             .build()
 
         var response = client.newCall(request).execute()
@@ -116,9 +115,9 @@ fun main(args: Array<String>) {
 
         val promptTTS = PlayHT(prompt, title)
 
-        val id = promptTTS.promptTTS()
-        val downloadUrl = promptTTS.jobStatus(id)
         try {
+        val id = promptTTS.promptTTS()
+        val downloadUrl = id?.let { promptTTS.jobStatus(it) }
             val url = URL(downloadUrl)
 
             val connection = url.openConnection() as HttpURLConnection

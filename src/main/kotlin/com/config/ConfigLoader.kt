@@ -12,6 +12,7 @@ class ConfigLoader {
         lateinit var outputFileName: String
         lateinit var outputFileDir: String
         lateinit var historyPrompt: String
+        lateinit var novelName: String
     }
     fun loadProperties (cofigLocation : String){
         val properties = Properties()
@@ -26,6 +27,7 @@ class ConfigLoader {
             outputFileName = properties.getProperty("outputFileName");
             outputFileDir = properties.getProperty("outputFileDir");
             historyPrompt = properties.getProperty("historyPrompt");
+            novelName = properties.getProperty("novelName");
 
             println("commandLineLocation: $commandLineLocation")
             println("callCommand: $callCommand")
