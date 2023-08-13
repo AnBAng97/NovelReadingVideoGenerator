@@ -13,12 +13,11 @@ fun main(args: Array<String>) {
         BarkAI()
     }
 
-    val directoryPath = "F:\\NovelReadingVideoGenerator\\HarryPotter"
-    val directory = File(directoryPath)
-
-    directory.listFiles()?.forEach {
-
-        val promptFile = it.canonicalPath
+//    val directoryPath = "F:\\NovelReadingVideoGenerator\\HarryPotter"
+    val directory = File(ConfigLoader.chapterDir)
+    val files = directory.listFiles()
+    files?.forEach {
+        val promptFile = it.absolutePath
         val outputName = "${ConfigLoader.novelName}_chapter_" + it.name.split(".")[0]
         println(promptFile)
         val promptRequest = BarkAI.Prompt(

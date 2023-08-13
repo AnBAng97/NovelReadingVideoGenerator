@@ -13,21 +13,23 @@ class ConfigLoader {
         lateinit var outputFileDir: String
         lateinit var historyPrompt: String
         lateinit var novelName: String
+        lateinit var chapterDir: String
     }
-    fun loadProperties (cofigLocation : String){
+    fun loadProperties (configLocation : String){
         val properties = Properties()
 
         try {
-            FileInputStream(cofigLocation).use { inputStream ->
+            FileInputStream(configLocation).use { inputStream ->
                 properties.load(inputStream)
             }
-            commandLineLocation = properties.getProperty("commandLineLocation");
+            commandLineLocation = properties.getProperty("commandLineLocation")
             callCommand = properties.getProperty("callCommand");
-            promptFile = properties.getProperty("promptFile");
-            outputFileName = properties.getProperty("outputFileName");
-            outputFileDir = properties.getProperty("outputFileDir");
-            historyPrompt = properties.getProperty("historyPrompt");
-            novelName = properties.getProperty("novelName");
+            outputFileName = properties.getProperty("outputFileName")
+            outputFileDir = properties.getProperty("outputFileDir")
+            historyPrompt = properties.getProperty("historyPrompt")
+            novelName = properties.getProperty("novelName")
+            chapterDir = properties.getProperty("chapterDir")
+            promptFile = properties.getProperty("promptFile")
 
             println("commandLineLocation: $commandLineLocation")
             println("callCommand: $callCommand")
