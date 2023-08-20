@@ -43,10 +43,10 @@ echo -
 @rem activate installer env
 call "%CONDA_ROOT_PREFIX%\condabin\conda.bat" activate "%INSTALL_ENV_DIR%" && cd bark || ( echo. && echo Miniconda hook not found. && goto end )
 
-echo Executing --- "%CALL_COMMAND% --prompt_file %PROMPT_FILE% --output_dir %OUTPUT_DIR% --output_filename %OUTPUT_FILENAME% --history_prompt %HISTORY_PROMPT% --hoarder_mode true --hoarder_mode true --text_temp 0.15 --waveform_temp 0.35 --stable_mode_interval 0" ---
+echo Executing --- "%CALL_COMMAND% --prompt_file %PROMPT_FILE% --output_dir %OUTPUT_DIR% --output_filename %OUTPUT_FILENAME% --history_prompt %HISTORY_PROMPT% --hoarder_mode true --hoarder_mode true --text_temp 0.15 --waveform_temp 0.35 --stable_mode_interval 1" ---
 
 @rem enter commands
-cmd /c "%CALL_COMMAND% --prompt_file %PROMPT_FILE% --output_dir %OUTPUT_DIR% --output_filename %OUTPUT_FILENAME% --history_prompt %HISTORY_PROMPT% --hoarder_mode true --text_temp 0.15 --waveform_temp 0.35 --stable_mode_interval 0"
+cmd /c "%CALL_COMMAND% --prompt_file %PROMPT_FILE% --output_dir %OUTPUT_DIR% --output_filename %OUTPUT_FILENAME% --history_prompt %HISTORY_PROMPT% --hoarder_mode true --text_temp 0.15 --waveform_temp 0.35 --stable_mode_interval 1"
 
 @rem echo   --output_dir OUTPUT_DIR
 @rem echo   --output_filename OUTPUT_FILENAME

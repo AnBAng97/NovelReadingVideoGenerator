@@ -18,8 +18,8 @@ class PlayHT(
     val voice: String = "Matthew"
 ) {
     val calendar: Calendar = Calendar.getInstance()
-    private val user = "nJ5LTCKNKLggxcEhGtPL08IbyMX2"
-    private val secret = "eaf4305d962d405abaf15c51640924ed"
+    private val user = "YIFmEyCasLgsVvJLr8DFra5xjYZ2"
+    private val secret = "1efd7c0c13cd48c4acbe7852d0ee0555"
 
     fun promptTTS(): String? {
         val client = OkHttpClient()
